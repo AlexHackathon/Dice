@@ -1,18 +1,23 @@
 ArrayList<Die> dice = new ArrayList<Die>();
+int sum;
 void setup(){
   size(400, 400);
+  sum = 0;
   for(int i = 0; i < 5; i++){
     for(int j = 0; j < 5; j++){
       Die d = new Die(75+i*50,75 + j*50,6, 50);
       d.rollDie();
       d.drawDie();
+      sum += d.getValue();
       dice.add(d);
     }
   }
 }
 void mouseClicked(){
+  sum = 0;
   for(int p = 0; p < dice.size(); p++){
     dice.get(p).rollDie();
+    sum += dice.get(p).getValue();
   }
 }
 void draw(){
@@ -20,6 +25,8 @@ void draw(){
   for(int p = 0; p < dice.size(); p++){
     dice.get(p).drawDie();
   }
+  textAlign(CENTER);
+  text("Score: " + sum, 200, 25);
 }
 class Die{
   int posX;
